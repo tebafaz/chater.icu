@@ -1,0 +1,109 @@
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf8">
+        <title>Chat</title>
+        <link rel="stylesheet" href="/assets/css/global.css">
+    </head>
+    <body class="body">
+        <h1 class="header">
+            Chat
+        </h1>
+
+        <div class="modal" id="login-modal">
+
+            <div class="modal-content">
+                <span class="close" id="close-login">
+                    &times;
+                </span>
+                <p>Login</p>
+                <div class="margin-v-15px">
+                    <label>username: </label>
+                    <br>
+                    <input type="text" id="login-username">
+                </div>
+                <div class="margin-v-15px">
+                    <label>password: </label>
+                    <br>
+                    <input type="password" id="login-password" onkeydown="loginKeydownListener(event);">
+                </div>
+                <div class="margin-v-15px">
+                    <label class="danger" id="login-error"></label>
+                </div>
+                <button id="login" onclick="loginClickListener();">
+                    Login
+                </button>
+            </div>
+
+        </div>
+
+        <div class="modal" id="register-modal">
+
+            <div class="modal-content">
+                <span class="close" id="close-register">&times;</span>
+                <p>Register</p>
+                <div class="margin-v-15px">
+                    <label>username: </label>
+                    <br>
+                    <input type="text" id="register-username">
+                </div>
+                <div class="margin-v-15px">
+                    <label>password: </label>
+                    <br>
+                    <input type="password" id="register-password">
+                </div>
+                <div class="margin-v-15px">
+                    <label>Retype password: </label>
+                    <br>
+                    <input type="password" id="register-password-retype" onkeydown="registerKeydownListener(event);">
+                </div>
+                <div class="margin-v-15px">
+                    <label class="danger" id="register-error"></label>
+                </div>
+                <button id="register" onclick="registerClickListener();">Register</button>
+            </div>
+
+        </div>
+
+        <div class="wrapper">
+            <div class="chatwrapper">
+                <div class="chat-background">
+                    <div id="chat" class="chat" onscroll="scrollListener(event);">
+                        <!--Here goes chat-->
+                    </div>
+                </div>
+                
+                <div class="interface" id="interface">
+                    <label id="username-label">username: </label>
+                    <button class="logout" id="logout" onclick="logoutListener();">Выйти</button>
+                    <input type="text" class="username-field" id="username-field"/>
+                    
+                    <textarea name="message" class="message-area" id="message-area" onkeydown="sendButtonKeydownListener(event);" onkeyup="sendButtonKeyupListener(event);"></textarea>
+                    <div>
+                        <span id="login-register-span">
+                            <button id="login-button">Войти</button> - <button id="register-button">Регистрация</button>
+                        </span>
+                    <button class="send-button" id="send-button" onclick="sendButtonClickListener();">>>></button>
+                    </div>
+                    <label class="danger" id="message-error"></label>
+                </div>
+            </div>
+            <div class="rules">
+                <h2>Глобальный чат для общения</h2>
+                <h3 id="rule-1">Вы можете писать без регистрации. Просто напишите имя в поле `username`, с которого вы хотите написать</h3>
+                <h3 style="color:red;" id="rule-2">Важно: Любой пользователь может использовать имена <span style="color: gray;">серого</span> цвета. Если вы зарегистрируетесь, то получите более защищенный аккаунт с паролем.</h3>
+                <h3 style="color:red;" id="rule-3">Пользователи без регистрации не могут удалять свои сообщения</h3>
+                <p id="rule-4">API документация: <a href="/swagger/index.html">swagger</a></p>
+                <p id="rule-5">Github аккаунт создателя: <a href="https://github.com/Tebafaz">tebafaz</a></p>
+            </div>
+        </div>
+    </body>
+    <script src="/assets/js/cookies.js"></script>
+    <script src="/assets/js/apiCallback.js"></script>
+    <script src="/assets/js/fetchers.js"></script>
+    <script src="/assets/js/senders.js"></script>
+    <script src="/assets/js/createNodes.js"></script>
+    <script src="/assets/js/callbackLogic.js"></script>
+    <script src="/assets/js/eventListeners.js"></script>
+</html>

@@ -1,0 +1,337 @@
+basePath: /api/v1
+definitions:
+  GuestMessageRequest:
+    properties:
+      message:
+        type: string
+      username:
+        type: string
+    type: object
+  ID:
+    properties:
+      id:
+        type: integer
+    type: object
+  MessageResponse:
+    properties:
+      last_id:
+        type: integer
+      messages:
+        items:
+          $ref: '#/definitions/models.Message'
+        type: array
+    type: object
+  StatusError:
+    properties:
+      error:
+        type: string
+    type: object
+  StatusSuccess:
+    properties:
+      success:
+        type: string
+    type: object
+  TokenRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  TokenResponse:
+    properties:
+      token:
+        type: string
+    type: object
+  UserMessageRequest:
+    properties:
+      message:
+        type: string
+    type: object
+  models.Message:
+    properties:
+      id:
+        type: integer
+      is_registered:
+        type: boolean
+      message:
+        type: string
+      sent_at:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: tebafaz@gmail.com
+    name: Tebafaz
+    url: http://www.swagger.io/support
+  description: Chater api made by Tebafaz using long poll as connction
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Chater.icu API
+  version: "1.0"
+paths:
+  /guest/message:
+    post:
+      consumes:
+      - application/json
+      description: Inserts data into database and publishes it to subscribers
+      parameters:
+      - description: Inserts and publishes as guest account
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/GuestMessageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/StatusSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/StatusError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/StatusError'
+      summary: Publishes message as guest
+      tags:
+      - Messages
+  /last-messages:
+    get:
+      description: Gets last 100 messages and latest message id for longpoll listening
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/MessageResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/StatusError'
+      summary: Gets last messages
+      tags:
+      - Messages
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Logs in by giving token
+      parameters:
+      - description: Username and password
+        in: body
+        name: tokenReq
+        required: true
+        schema:
+          $ref: '#/definitions/TokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/TokenResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/StatusError'
+      summary: Login
+      tags:
+      - Token
+  /messages:
+    get:
+      description: Gets message downwards from given id with limit
+      parameters:
+      - description: message id from which gets older messages
+        in: query
+        name: last_id
+        required: true
+        type: integer
+      - description: limit of messages in response
+        in: query
+        name: limit
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/StatusError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/StatusError'
+      summary: Gets messages
+      tags:
+      - Messages
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: Registers new user and returns token
+      parameters:
+      - description: Token
+        in: body
+        name: token
+        required: true
+        schema:
+          $ref: '#/definitions/TokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/TokenResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/StatusError'
+      summary: Register and get token
+      tags:
+      - Token
+  /subscribe:
+    get:
+      description: Subscribes to updates with longpoll connection
+      parameters:
+      - description: Client listening message id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/MessageResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/StatusError'
+        "429":
+          description: Too Many Requests
+          schema:
+            $ref: '#/definitions/StatusError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/StatusError'
+      summary: Subscribes to updates
+      tags:
+      - Messages
+  /user/logout:
+    post:
+      consumes:
+      - application/json
+      description: Logs out user by deleting his token in server
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/StatusSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/StatusError'
+        "401":
+          description: Unauthorized
+      security:
+      - ApiKeyAuth: []
+      summary: Logs out
+      tags:
+      - Token
+  /user/message:
+    delete:
+      consumes:
+      - application/json
+      description: Delete message by id
+      parameters:
+      - description: Deletes message based on message id and provided token
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/ID'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/StatusSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/StatusError'
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/StatusError'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete message
+      tags:
+      - Messages
+    post:
+      consumes:
+      - application/json
+      description: Inserts message into database and publishes it to subscribers
+      parameters:
+      - description: Message
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/UserMessageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/StatusSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/StatusError'
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/StatusError'
+      security:
+      - ApiKeyAuth: []
+      summary: publishes as user
+      tags:
+      - Messages
+schemes:
+- http
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
