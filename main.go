@@ -61,7 +61,7 @@ func init() {
 // @schemes https
 
 func startServer() (*http.Server, <-chan error) {
-	//gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.ReleaseMode)
 
 	router := gin.New()
 
