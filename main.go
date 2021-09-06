@@ -46,7 +46,7 @@ func init() {
 // @contact.name Tebafaz
 // @contact.email tebafaz@gmail.com
 
-// @host chater.icu:80
+// @host chater.icu
 // @BasePath /api/v1
 
 // @license.name Apache 2.0
@@ -68,7 +68,7 @@ func startServer() (*http.Server, <-chan error) {
 	router.Use(middlewares.AccessLog(false))
 	router.Use(middlewares.SessionCounter(3000))
 
-	swaggerURL := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
+	swaggerURL := ginSwagger.URL("/swagger/doc.json")
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, swaggerURL))
 
 	router.Use(gin.Recovery())

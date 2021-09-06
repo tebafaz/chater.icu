@@ -61,7 +61,7 @@ definitions:
       username:
         type: string
     type: object
-host: chater.icu:80
+host: chater.icu
 info:
   contact:
     email: tebafaz@gmail.com

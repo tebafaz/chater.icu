@@ -540,7 +540,7 @@ type swaggerInfo struct {
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
 	Version:     "1.0",
-	Host:        "chater.icu:80",
+	Host:        "chater.icu",
 	BasePath:    "/api/v1",
 	Schemes:     []string{"https"},
 	Title:       "Chater.icu API",

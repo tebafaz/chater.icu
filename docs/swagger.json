@@ -16,7 +16,7 @@
         },
         "version": "1.0"
     },
-    "host": "chater.icu:80",
+    "host": "chater.icu",
     "basePath": "/api/v1",
     "paths": {
         "/guest/message": {
