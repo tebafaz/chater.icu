@@ -13,7 +13,7 @@ import (
 
 // login godoc
 // @Summary Login
-// @Description Logs in by giving token
+// @Description Logs in by giving token. Token lasts 30 minutes and updates it at each performed action with token
 // @Tags Token
 // @Accept json
 // @Produce  json

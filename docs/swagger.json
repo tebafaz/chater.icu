@@ -1,15 +1,13 @@
 {
     "schemes": [
-        "http"
+        "https"
     ],
     "swagger": "2.0",
     "info": {
         "description": "Chater api made by Tebafaz using long poll as connction",
         "title": "Chater.icu API",
-        "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "Tebafaz",
-            "url": "http://www.swagger.io/support",
             "email": "tebafaz@gmail.com"
         },
         "license": {
@@ -18,7 +16,7 @@
         },
         "version": "1.0"
     },
-    "host": "localhost:8080",
+    "host": "chater.icu:80",
     "basePath": "/api/v1",
     "paths": {
         "/guest/message": {
@@ -95,7 +93,7 @@
         },
         "/login": {
             "post": {
-                "description": "Logs in by giving token",
+                "description": "Logs in by giving token. Token lasts 30 minutes and updates it at each performed action with token",
                 "consumes": [
                     "application/json"
                 ],
@@ -183,7 +181,7 @@
         },
         "/register": {
             "post": {
-                "description": "Registers new user and returns token",
+                "description": "Registers new user and returns token. Token lasts 30 minutes and updates it at each performed action with token",
                 "consumes": [
                     "application/json"
                 ],

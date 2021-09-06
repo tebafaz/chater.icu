@@ -13,7 +13,7 @@ import (
 
 // registerAndLogin godoc
 // @Summary Register and get token
-// @Description Registers new user and returns token
+// @Description Registers new user and returns token. Token lasts 30 minutes and updates it at each performed action with token
 // @Tags Token
 // @Accept json
 // @Produce  json

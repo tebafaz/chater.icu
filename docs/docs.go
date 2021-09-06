@@ -17,10 +17,8 @@ var doc = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "Tebafaz",
-            "url": "http://www.swagger.io/support",
             "email": "tebafaz@gmail.com"
         },
         "license": {
@@ -106,7 +104,7 @@ var doc = `{
         },
         "/login": {
             "post": {
-                "description": "Logs in by giving token",
+                "description": "Logs in by giving token. Token lasts 30 minutes and updates it at each performed action with token",
                 "consumes": [
                     "application/json"
                 ],
@@ -194,7 +192,7 @@ var doc = `{
         },
         "/register": {
             "post": {
-                "description": "Registers new user and returns token",
+                "description": "Registers new user and returns token. Token lasts 30 minutes and updates it at each performed action with token",
                 "consumes": [
                     "application/json"
                 ],
@@ -542,9 +540,9 @@ type swaggerInfo struct {
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
 	Version:     "1.0",
-	Host:        "localhost:8080",
+	Host:        "chater.icu:80",
 	BasePath:    "/api/v1",
-	Schemes:     []string{"http"},
+	Schemes:     []string{"https"},
 	Title:       "Chater.icu API",
 	Description: "Chater api made by Tebafaz using long poll as connction",
 }

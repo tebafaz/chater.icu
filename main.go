@@ -65,7 +65,7 @@ func startServer() (*http.Server, <-chan error) {
 
 	router := gin.New()
 
-	router.Use(middlewares.AccessLog(true))
+	router.Use(middlewares.AccessLog(false))
 	router.Use(middlewares.SessionCounter(3000))
 
 	swaggerURL := ginSwagger.URL("http://localhost:8080/swagger/doc.json")

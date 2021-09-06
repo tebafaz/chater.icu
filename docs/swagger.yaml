@@ -61,17 +61,15 @@ definitions:
       username:
         type: string
     type: object
-host: localhost:8080
+host: chater.icu:80
 info:
   contact:
     email: tebafaz@gmail.com
     name: Tebafaz
-    url: http://www.swagger.io/support
   description: Chater api made by Tebafaz using long poll as connction
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: http://swagger.io/terms/
   title: Chater.icu API
   version: "1.0"
 paths:
@@ -126,7 +124,8 @@ paths:
     post:
       consumes:
       - application/json
-      description: Logs in by giving token
+      description: Logs in by giving token. Token lasts 30 minutes and updates it
+        at each performed action with token
       parameters:
       - description: Username and password
         in: body
@@ -184,7 +183,8 @@ paths:
     post:
       consumes:
       - application/json
-      description: Registers new user and returns token
+      description: Registers new user and returns token. Token lasts 30 minutes and
+        updates it at each performed action with token
       parameters:
       - description: Token
         in: body
@@ -328,7 +328,7 @@ paths:
       tags:
       - Messages
 schemes:
-- http
+- https
 securityDefinitions:
   ApiKeyAuth:
     in: header
