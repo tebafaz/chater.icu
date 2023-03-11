@@ -10,11 +10,11 @@ import (
 	"syscall"
 	"time"
 
-	"chat/database"
-	_ "chat/docs"
-	"chat/handlers"
-	"chat/middlewares"
-	"chat/redis"
+	"github.com/tebafaz/chater.icu/database"
+	_ "github.com/tebafaz/chater.icu/docs"
+	"github.com/tebafaz/chater.icu/handlers"
+	"github.com/tebafaz/chater.icu/middlewares"
+	"github.com/tebafaz/chater.icu/redis"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -43,7 +43,7 @@ func init() {
 // @version 1.0
 // @description Chater api made by Tebafaz using long poll as connction
 
-// @contact.name Tebafaz
+// @contact.name Mukhamedjanov Erjan
 // @contact.email tebafaz@gmail.com
 
 // @host chater.icu

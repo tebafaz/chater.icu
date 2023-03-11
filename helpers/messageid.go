@@ -1,8 +1,9 @@
 package helpers
 
 import (
-	"chat/database"
 	"sync"
+
+	"github.com/tebafaz/chater.icu/database"
 )
 
 type LastMessageID struct {

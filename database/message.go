@@ -1,8 +1,9 @@
 package database
 
 import (
-	"chat/models"
 	"errors"
+
+	"github.com/tebafaz/chater.icu/models"
 )
 
 func GetLastMessageID() (int, error) {

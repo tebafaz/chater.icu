@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"chat/models"
-	"chat/redis"
+	"github.com/tebafaz/chater.icu/models"
+	"github.com/tebafaz/chater.icu/redis"
 
 	"github.com/gin-gonic/gin"
 )
@@ -40,7 +40,19 @@ func CheckToken(c *gin.Context) {
 		Id:       id,
 		Username: username,
 	}
-	redis.Setex(username, 30*60, fmt.Sprintf("%d", id))
-	redis.Setex(token, 30*60, username)
+	err = redis.Setex(username, 30*60, fmt.Sprintf("%d", id))
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	err = redis.Setex(token, 30*60, username)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
 	c.Set("user", user)
 }

@@ -1,6 +1,6 @@
 package database
 
-import "chat/models"
+import "github.com/tebafaz/chater.icu/models"
 
 func GetUserByUsername(username string) (models.User, error) {
 	var user models.User

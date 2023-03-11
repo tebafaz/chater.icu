@@ -11,22 +11,22 @@ type Message struct {
 type MessageRes struct {
 	LastMessageID int       `json:"last_id"`
 	Messages      []Message `json:"messages"`
-} //@name MessageResponse
+}
 
 type GuestMessageReq struct {
 	Message  string `json:"message"`
 	Username string `json:"username"`
-} //@name GuestMessageRequest
+}
 
 type MessagesFromLast struct {
 	LastID int `form:"last_id"`
 	Limit  int `form:"limit"`
-} //@name MessagesFromLastID
+}
 
 type DeletedMessage struct {
 	DeletedID int `json:"deleted_id"`
-} //@name DeletedMessage
+}
 
 type UserMessageReq struct {
 	Message string `json:"message"`
-} //@name UserMessageRequest
+}

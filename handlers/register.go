@@ -1,12 +1,13 @@
 package handlers
 
 import (
-	"chat/database"
-	"chat/helpers"
-	"chat/models"
-	"chat/redis"
 	"fmt"
 	"net/http"
+
+	"github.com/tebafaz/chater.icu/database"
+	"github.com/tebafaz/chater.icu/helpers"
+	"github.com/tebafaz/chater.icu/models"
+	"github.com/tebafaz/chater.icu/redis"
 
 	"github.com/gin-gonic/gin"
 )
@@ -54,7 +55,19 @@ func registerAndLogin(c *gin.Context) {
 	tokenResponse := models.TokenRes{
 		Token: helpers.CreateToken(),
 	}
-	redis.Setex(tokenResponse.Token, 30*60, user.Username)
-	redis.Setex(user.Username, 30*60, fmt.Sprintf("%d", id))
+	err = redis.Setex(tokenResponse.Token, 30*60, user.Username)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+	err = redis.Setex(user.Username, 30*60, fmt.Sprintf("%d", id))
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
 	c.JSON(http.StatusOK, tokenResponse)
 }

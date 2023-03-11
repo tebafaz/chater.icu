@@ -1,9 +1,10 @@
 package handlers
 
 import (
-	"chat/database"
-	"chat/models"
 	"net/http"
+
+	"github.com/tebafaz/chater.icu/database"
+	"github.com/tebafaz/chater.icu/models"
 
 	"github.com/gin-gonic/gin"
 )

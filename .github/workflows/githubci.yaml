@@ -1,0 +1,29 @@
+name: CI
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: '1.16.x'
+    - name: Install dependencies
+      run: go get .
+    - name: Build
+      run: go build -v ./...
+    - name: Test with the Go CLI
+      run: go test
+  lint: 
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Lint
+      uses: github/super-linter@v4
+      env:
+        VALIDATE_ALL_CODEBASE: true
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

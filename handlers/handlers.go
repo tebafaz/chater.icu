@@ -1,13 +1,10 @@
 package handlers
 
 import (
-	"chat/helpers"
-	"chat/middlewares"
 	"errors"
 
-	//"chat/middlewares"
-
-	//"musicapi/middlewares"
+	"github.com/tebafaz/chater.icu/helpers"
+	"github.com/tebafaz/chater.icu/middlewares"
 
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
