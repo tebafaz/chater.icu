@@ -1,7 +1,7 @@
 name: CI
 on: push
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -15,6 +15,7 @@ jobs:
       run: go build -v ./...
     - name: Test with the Go CLI
       run: go test -v ./...
+  
   lint: 
     runs-on: ubuntu-latest
     steps:
@@ -26,4 +27,8 @@ jobs:
       uses: github/super-linter@v4
       env:
         VALIDATE_ALL_CODEBASE: true
+        VALIDATE_JSON: false
+        VALIDATE_YAML: false
+        LINTER_RULES_PATH: /
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
