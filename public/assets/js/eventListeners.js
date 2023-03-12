@@ -1,42 +1,48 @@
+import { getById, fetcher } from './apiCallback'
+import { checkSession, getFirstID } from './callbackLogic'
+import { deleteAuthUserCookie, setAuthUserCookie } from './cookies'
+import { sendMessage, deleteMessage, login, register, logout } from './senders'
+import { fetchFromPriorMessages } from './fetchers'
+
 const sendButtonClickListener = async () => {
-  getById('message-error').textContent = ""
+  getById('message-error').textContent = ''
   const res = await sendMessage()
-  if(res.error !== undefined){
+  if (res.error !== undefined) {
     getById('message-error').textContent = res.error
   }
-  getById('message-area').value = ""
+  getById('message-area').value = ''
 }
 
-const sendButtonKeydownListener =  async (event) => {
-  if (event.key == "Enter" && getById('message-area').value != "") {
-    getById('message-error').textContent = ""
+const sendButtonKeydownListener = async (event) => {
+  if (event.key === 'Enter' && getById('message-area').value !== '') {
+    getById('message-error').textContent = ''
     const res = await sendMessage()
-    if(res.error !== undefined){
+    if (res.error !== undefined) {
       getById('message-error').textContent = res.error
     }
-    getById('message-area').value = ""
+    getById('message-area').value = ''
   }
 }
 
 const sendButtonKeyupListener = (event) => {
-  if (event.key == "Enter") {
-    getById('message-area').value = ""
+  if (event.key === 'Enter') {
+    getById('message-area').value = ''
   }
 }
 
 const deleteMessageListener = async (event) => {
-  getById('message-error').textContent = ""
+  getById('message-error').textContent = ''
   const res = await deleteMessage(parseInt(event.target.parentElement.id))
-  if(res.error !== undefined){
+  if (res.error !== undefined) {
     getById('message-error').textContent = res.error
   }
 }
 
 const scrollListener = async () => {
-  if (getById('chat').scrollTop == 0 && firstID != 1) {
-    getById('message-error').textContent = ""
+  if (getById('chat').scrollTop === 0 && getFirstID() !== 1) {
+    getById('message-error').textContent = ''
     const height = getById('chat').scrollHeight
-    const res = await fetcher(`/api/v1/messages?last_id=${firstID}&limit=50`, fetchFromPriorMessages)
+    const res = await fetcher(`/api/v1/messages?last_id=${getFirstID()}&limit=50`, fetchFromPriorMessages)
     console.log(`asa ${res}`)
     if (res != null && res.error !== undefined) {
       getById('message-error').textContent = res.error
@@ -51,13 +57,13 @@ const loginClickListener = async () => {
 }
 
 const loginKeydownListener = async (event) => {
-  if (event.key == "Enter" && getById('login-username').value != "" && getById('login-password').value != "") {
+  if (event.key === 'Enter' && getById('login-username').value !== '' && getById('login-password').value !== '') {
     await loginHandler()
   }
 }
 
 const loginHandler = async () => {
-  getById('login-error').innerHTML = ""
+  getById('login-error').innerHTML = ''
   const res = await login()
   if (res.error !== undefined) {
     getById('login-error').textContent = res.error
@@ -65,9 +71,9 @@ const loginHandler = async () => {
   }
   setAuthUserCookie(res.token, getById('login-username').value)
   checkSession()
-  getById('login-modal').style.display = "none"
-  getById('login-username').value = ""
-  getById('login-password').value = ""
+  getById('login-modal').style.display = 'none'
+  getById('login-username').value = ''
+  getById('login-password').value = ''
 }
 
 const registerClickListener = async () => {
@@ -75,14 +81,14 @@ const registerClickListener = async () => {
 }
 
 const registerKeydownListener = async (event) => {
-  if (event.key == "Enter" && getById('register-username').value != "" && getById('register-password').value != "") {
+  if (event.key === 'Enter' && getById('register-username').value !== '' && getById('register-password').value !== '') {
     await registerHandler()
   }
 }
 
 const registerHandler = async () => {
-  getById('register-error').innerHTML = ""
-  if (getById('register-password').value != getById('register-password-retype').value && getById('register-password').value != "") {
+  getById('register-error').innerHTML = ''
+  if (getById('register-password').value !== getById('register-password-retype').value && getById('register-password').value !== '') {
     getById('register-error').innerHTML = "passwords don't match"
     return
   }
@@ -93,13 +99,13 @@ const registerHandler = async () => {
   }
   setAuthUserCookie(res.token, getById('register-username').value)
   checkSession()
-  getById('register-modal').style.display = "none"
-  getById('register-username').value = ""
-  getById('register-password').value = ""
+  getById('register-modal').style.display = 'none'
+  getById('register-username').value = ''
+  getById('register-password').value = ''
 }
 
 const logoutListener = async () => {
-  getById('message-error').textContent = ""
+  getById('message-error').textContent = ''
   const res = await logout()
   if (res.error !== undefined) {
     getById('message-error').textContent = res.error
@@ -115,29 +121,31 @@ const registerModal = getById('register-modal')
 const closeLogin = getById('close-login')
 const closeRegister = getById('close-register')
 
-getById('login-button').onclick = function() {
-  loginModal.style.display = "block"
+getById('login-button').onclick = function () {
+  loginModal.style.display = 'block'
   getById('login-username').focus()
 }
 
-getById('register-button').onclick = function() {
-  registerModal.style.display = "block"
+getById('register-button').onclick = function () {
+  registerModal.style.display = 'block'
   getById('register-username').focus()
 }
 
-closeLogin.onclick = function() {
-  loginModal.style.display = "none"
+closeLogin.onclick = function () {
+  loginModal.style.display = 'none'
 }
 
-closeRegister.onclick = function() {
-  registerModal.style.display = "none"
+closeRegister.onclick = function () {
+  registerModal.style.display = 'none'
 }
 
-window.onmousedown = function(event) {
-  if (event.target == loginModal) {
-    loginModal.style.display = "none"
+window.onmousedown = function (event) {
+  if (event.target === loginModal) {
+    loginModal.style.display = 'none'
   }
-  if (event.target == registerModal) {
-    registerModal.style.display = "none"
-  } 
+  if (event.target === registerModal) {
+    registerModal.style.display = 'none'
+  }
 }
+
+export { sendButtonClickListener, sendButtonKeydownListener, sendButtonKeyupListener, deleteMessageListener, scrollListener, loginClickListener, loginKeydownListener, registerClickListener, registerKeydownListener, logoutListener }

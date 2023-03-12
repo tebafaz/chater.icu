@@ -1,4 +1,7 @@
-async function fetcher(fetchFrom, func) {
+import { stateRegistered } from './callbackLogic'
+import { updateAuthUserCookie, getCookie } from './cookies'
+
+async function fetcher (fetchFrom, func) {
   try {
     const res = await fetch(fetchFrom)
     const data = await res.json()
@@ -12,7 +15,7 @@ async function fetcher(fetchFrom, func) {
   return null
 }
 
-async function fetcherForSub(fetchFrom, func) {
+async function fetcherForSub (fetchFrom, func) {
   try {
     const res = await fetch(fetchFrom)
     if (res.status >= 400 && res.status <= 600) {
@@ -23,41 +26,44 @@ async function fetcherForSub(fetchFrom, func) {
       func(data)
     }
   } catch (error) {
-    throw error
+    console.log(error)
   }
   return null
 }
 
-async function dataSend(path, data, method, headers) {
+async function dataSend (path, data, method, headers) {
   try {
     const res = await fetch(path, {
-      method: method,
+      method,
       body: JSON.stringify(data),
-      headers: headers
+      headers
     })
-    const data = await res.json()
-    if (res.status < 400 && state_registered) {
+    data = await res.json()
+    if (res.status < 400 && stateRegistered) {
       updateAuthUserCookie()
     }
-    return data    
+    return data
   } catch (error) {
     console.log(error)
   }
 }
 
-function getHeaders(is_registered) {
-  return (is_registered ? {
-    'Content-Type': 'application/json',
-    'Authorization': getCookie('Authorization')
-  } : {
-    'Content-Type': 'application/json',
-  })
+function getHeaders (isRegistered) {
+  return (isRegistered
+    ? {
+        'Content-Type': 'application/json',
+        Authorization: getCookie('Authorization')
+      }
+    : {
+        'Content-Type': 'application/json'
+      })
 }
 
-
-function getById(id) {
+function getById (id) {
   return document.getElementById(id)
 }
-function createElement(element) {
+function createElement (element) {
   return document.createElement(element)
 }
+
+export { fetcher, fetcherForSub, dataSend, getHeaders, getById, createElement }

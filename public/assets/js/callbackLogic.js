@@ -1,59 +1,89 @@
-var firstID
-var lastID
-var state_registered = false
+import { fetcher, fetcherForSub, getById } from './apiCallback'
+import { fetchFromConnect, fetchFromSubscribe } from './fetchers'
+import { getCookie } from './cookies'
+
+let firstID
+
+const setFirstID = (num) => {
+  firstID = num
+}
+
+const getFirstID = () => {
+  return firstID
+}
+
+let lastID
+
+const setLastID = (num) => {
+  firstID = num
+}
+
+const getLastID = () => {
+  return firstID
+}
+
+let stateRegistered = false
+
+const setStateRegisteredID = (num) => {
+  firstID = num
+}
+
+const getStateRegisteredID = () => {
+  return firstID
+}
 
 const checkSession = () => {
-  if(getCookie('username') != null && getCookie('Authorization') != null) {
-    state_registered = true
-    getById('rule-1').style.display = "none"
-    getById('rule-3').style.display = "none"
-    getById('username-field').style.display = "none"
-    getById('login-register-span').style.display = "none"
-    getById('logout').style.display = "unset"
+  if (getCookie('username') != null && getCookie('Authorization') != null) {
+    stateRegistered = true
+    getById('rule-1').style.display = 'none'
+    getById('rule-3').style.display = 'none'
+    getById('username-field').style.display = 'none'
+    getById('login-register-span').style.display = 'none'
+    getById('logout').style.display = 'unset'
     getById('username-label').textContent = `username: ${getCookie('username')}`
     updateChat()
   } else {
-    state_registered = false
-    getById('rule-1').style.display = "unset"
-    getById('rule-3').style.display = "unset"
-    getById('username-field').style.display = "unset"
-    getById('login-register-span').style.display = "unset"
-    getById('logout').style.display = "none"
-    getById('username-label').textContent = "username: "
+    stateRegistered = false
+    getById('rule-1').style.display = 'unset'
+    getById('rule-3').style.display = 'unset'
+    getById('username-field').style.display = 'unset'
+    getById('login-register-span').style.display = 'unset'
+    getById('logout').style.display = 'none'
+    getById('username-label').textContent = 'username: '
     updateChat()
   }
 }
 
 const updateChat = () => {
-  if (state_registered) {
+  if (stateRegistered) {
     document.querySelectorAll(`[username="${getCookie('username')}"]`).forEach((element) => {
       element.firstChild.setAttribute('class', 'my-username')
-      element.querySelector('.message-delete').style.display = "unset"
+      element.querySelector('.message-delete').style.display = 'unset'
     })
   } else {
     document.querySelectorAll('[registered="true"]').forEach((element) => {
-      if(element.getAttribute('username') == 'tebafaz') {
+      if (element.getAttribute('username') === 'tebafaz') {
         element.firstChild.setAttribute('class', 'priveleged-username')
         return
       }
       element.firstChild.setAttribute('class', 'registered-username')
-      element.querySelector('.message-delete').style.display = "none"
+      element.querySelector('.message-delete').style.display = 'none'
     })
   }
 }
 
-async function main() {
+async function main () {
   checkSession()
   let err = await fetcher('/api/v1/last-messages', fetchFromConnect)
-  if (err != undefined) {
+  if (err !== undefined) {
     console.log('cannot connect to server')
   }
   let fewRequests = true
   const tooManyRequest = 429
   try {
-    while(fewRequests){
+    while (fewRequests) {
       err = await fetcherForSub(`/api/v1/subscribe?id=${lastID + 1}`, fetchFromSubscribe)
-      if (err != undefined && err.status == tooManyRequest) {
+      if (err !== undefined && err.status === tooManyRequest) {
         console.log('cannot subscribe to server')
         fewRequests = false
       }
@@ -62,12 +92,14 @@ async function main() {
     console.log(err)
     return
   }
-  
+
   setInterval(async () => {
     await fetcherForSub(`/api/v1/subscribe?id=${lastID + 1}`, fetchFromSubscribe)
-  }, 1000);
+  }, 1000)
 }
 
 window.addEventListener('load', () => {
-    main()
+  main()
 })
+
+export { checkSession, updateChat, firstID, lastID, stateRegistered, setFirstID, getFirstID, setLastID, getLastID, setStateRegisteredID, getStateRegisteredID }

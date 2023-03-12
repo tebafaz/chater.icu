@@ -1,3 +1,6 @@
+import { createElement } from './apiCallback'
+import { getCookie } from './cookies'
+
 const createChatCenterElement = message => {
   const element = createElement('p')
   element.append(message)
@@ -19,17 +22,17 @@ const createMessage = element => {
   }
   wrapper.setAttribute('username', element.username)
   wrapper.setAttribute('id', element.id)
-  wrapper.append(usernameNode, ' - ', dateNode, `: `, textMenuNode, createElement('br'), messageNode)
+  wrapper.append(usernameNode, ' - ', dateNode, ': ', textMenuNode, createElement('br'), messageNode)
   return wrapper
 }
 
-const createUsernameNode = ({username, is_registered}) => {
+const createUsernameNode = ({ username, isRegistered }) => {
   const usernameNode = createElement('span')
-  if (getCookie("username") == username) {
+  if (getCookie('username') === username) {
     usernameNode.setAttribute('class', 'my-username')
-  } else if (username == 'tebafaz') {
+  } else if (username === 'tebafaz') {
     usernameNode.setAttribute('class', 'priveleged-username')
-  } else if (is_registered){
+  } else if (isRegistered) {
     usernameNode.setAttribute('class', 'registered-username')
   } else {
     usernameNode.setAttribute('class', 'not-registered-username')
@@ -38,28 +41,30 @@ const createUsernameNode = ({username, is_registered}) => {
   return usernameNode
 }
 
-const createDateNode = ({sent_at}) => {
+const createDateNode = ({ sentAt }) => {
   const dateNode = createElement('span')
   dateNode.setAttribute('class', 'date')
-  dateNode.append(sent_at)
+  dateNode.append(sentAt)
   return dateNode
 }
 
-const createTextMenuNode = ({username}) => {
+const createTextMenuNode = ({ username }) => {
   const span = createElement('span')
   span.setAttribute('class', 'message-delete')
   span.setAttribute('title', 'delete this message')
   span.setAttribute('onclick', 'deleteMessageListener(event);')
   span.innerHTML = '&times;'
-  if (getCookie("username") != username) {
-    span.style.display = "none"
+  if (getCookie('username') !== username) {
+    span.style.display = 'none'
   }
   return span
 }
 
-const createMessageNode = ({message}) => {
+const createMessageNode = ({ message }) => {
   const messageNode = createElement('span')
   messageNode.setAttribute('class', 'message')
   messageNode.append(message)
   return messageNode
 }
+
+export { createChatCenterElement, createMessage, createUsernameNode, createDateNode, createTextMenuNode, createMessageNode }

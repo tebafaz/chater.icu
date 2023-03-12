@@ -29,6 +29,5 @@ jobs:
         VALIDATE_ALL_CODEBASE: true
         VALIDATE_JSON: false
         VALIDATE_YAML: false
-        LINTER_RULES_PATH: /
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
