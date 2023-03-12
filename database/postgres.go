@@ -6,14 +6,14 @@ import (
 
 	"github.com/jmoiron/sqlx"
 
-	//postgres driver
+	// postgres driver
 	_ "github.com/lib/pq"
 )
 
-//Postgres a
+// Postgres a
 var postgres *sqlx.DB
 
-//InitPostgres a
+// InitPostgres a
 func InitPostgres() error {
 	var err error
 	postgres, err = sqlx.Connect("postgres", fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s",
@@ -22,7 +22,7 @@ func InitPostgres() error {
 	return err
 }
 
-//ClosePostgres a
+// ClosePostgres a
 func ClosePostgres() {
 	err := postgres.Close()
 	if err != nil {

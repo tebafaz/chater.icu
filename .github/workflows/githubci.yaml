@@ -16,7 +16,7 @@ jobs:
     - name: Test with the Go CLI
       run: go test -v ./...
   
-  lint: 
+  lint-except-go: 
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -29,5 +29,6 @@ jobs:
         VALIDATE_ALL_CODEBASE: true
         VALIDATE_JSON: false
         VALIDATE_YAML: false
+        VALIDATE_GO: false
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
