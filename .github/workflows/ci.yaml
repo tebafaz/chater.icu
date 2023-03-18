@@ -4,32 +4,14 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
+    - name: Setup
       uses: actions/checkout@v3
-    - name: Setup Go
       uses: actions/setup-go@v3
       with:
         go-version: '1.15.x'
-  
-  build:
-    needs: [ prepare ]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Install dependencies
-      run: go get .
     - name: Build
       run: go build -v ./...
-  
-  test:
-    needs: [ prepare ]
-    runs-on: ubuntu-latest
-    steps:
     - name: Test
       run: go test -v ./...
-
-  lint:
-    needs: [ prepare ]
-    runs-on: ubuntu-latest
-    steps:
     - name: Lint
       uses: golangci/golangci-lint-action@v3
