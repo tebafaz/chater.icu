@@ -82,7 +82,7 @@ func startServer() (*http.Server, <-chan error) {
 	}
 
 	srv := &http.Server{
-		Addr:    ":8080",
+		Addr:    os.Getenv("PORT"),
 		Handler: router,
 	}
 

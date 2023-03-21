@@ -10,13 +10,13 @@ import (
 	"github.com/gomodule/redigo/redis"
 )
 
-//Redis a
+// Redis a
 var redisConn redis.Conn
 
-//InitRedis a
+// InitRedis a
 func InitRedis() error {
 	var err error
-	redisConn, err = redis.Dial("tcp", fmt.Sprintf("%s:%s", os.Getenv("HOSTNAME"), os.Getenv("REDIS_PORT")), redis.DialPassword(os.Getenv("REDIS_PASSWORD")))
+	redisConn, err = redis.Dial("tcp", fmt.Sprintf("%s:%s", os.Getenv("REDIS_HOSTNAME"), os.Getenv("REDIS_PORT")), redis.DialPassword(os.Getenv("REDIS_PASSWORD")))
 	if err != nil {
 		return err
 	}
@@ -24,7 +24,7 @@ func InitRedis() error {
 	return nil
 }
 
-//CloseRedis a
+// CloseRedis a
 func CloseRedis() {
 	err := redisConn.Close()
 	if err != nil {
