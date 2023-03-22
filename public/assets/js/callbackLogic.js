@@ -1,5 +1,5 @@
-let firstID
-let lastID
+let firstID = 0
+let lastID = 0
 let stateRegistered = false
 
 const checkSession = () => {
