@@ -1,32 +1,6 @@
 let firstID
-
-const setFirstID = (num) => {
-  firstID = num
-}
-
-const getFirstID = () => {
-  return firstID
-}
-
 let lastID
-
-const setLastID = (num) => {
-  firstID = num
-}
-
-const getLastID = () => {
-  return firstID
-}
-
 let stateRegistered = false
-
-const setStateRegisteredID = (num) => {
-  firstID = num
-}
-
-const getStateRegisteredID = () => {
-  return firstID
-}
 
 const checkSession = () => {
   if (getCookie('username') != null && getCookie('Authorization') != null) {
