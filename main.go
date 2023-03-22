@@ -47,17 +47,17 @@ func init() {
 // @contact.name Mukhamedjanov Erjan
 // @contact.email tebafaz@gmail.com
 
-// @host chater.icu
+// @host tebafaz.com
 // @BasePath /api/v1
 
-// @license.name Apache 2.0
-// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @license.name MIT
+// @license.url https://mit-license.org/
 
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
 // @name Authorization
-// @authorizationurl https://chater.icu/api/v1/register
-// @tokenUrl https://chater.icu/api/v1/login
+// @authorizationurl https://chatericu.tebafaz.com/api/v1/register
+// @tokenUrl https://chatericu.tebafaz.com/api/v1/login
 
 // @schemes https
 

@@ -29,5 +29,3 @@ function updateAuthUserCookie () {
   createCookie('Authorization', getCookie('Authorization'), 30)
   createCookie('username', getCookie('username'), 30)
 }
-
-export { createCookie, deleteCookie, getCookie, setAuthUserCookie, deleteAuthUserCookie, updateAuthUserCookie }

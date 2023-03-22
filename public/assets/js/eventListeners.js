@@ -1,9 +1,3 @@
-import { getById, fetcher } from './apiCallback'
-import { checkSession, getFirstID } from './callbackLogic'
-import { deleteAuthUserCookie, setAuthUserCookie } from './cookies'
-import { sendMessage, deleteMessage, login, register, logout } from './senders'
-import { fetchFromPriorMessages } from './fetchers'
-
 const sendButtonClickListener = async () => {
   getById('message-error').textContent = ''
   const res = await sendMessage()
@@ -147,5 +141,3 @@ window.onmousedown = function (event) {
     registerModal.style.display = 'none'
   }
 }
-
-export { sendButtonClickListener, sendButtonKeydownListener, sendButtonKeyupListener, deleteMessageListener, scrollListener, loginClickListener, loginKeydownListener, registerClickListener, registerKeydownListener, logoutListener }

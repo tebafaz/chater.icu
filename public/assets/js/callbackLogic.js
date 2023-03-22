@@ -1,7 +1,3 @@
-import { fetcher, fetcherForSub, getById } from './apiCallback'
-import { fetchFromConnect, fetchFromSubscribe } from './fetchers'
-import { getCookie } from './cookies'
-
 let firstID
 
 const setFirstID = (num) => {
@@ -101,5 +97,3 @@ async function main () {
 window.addEventListener('load', () => {
   main()
 })
-
-export { checkSession, updateChat, firstID, lastID, stateRegistered, setFirstID, getFirstID, setLastID, getLastID, setStateRegisteredID, getStateRegisteredID }

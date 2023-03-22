@@ -1,7 +1,3 @@
-import { createChatCenterElement, createMessage } from './createNodes'
-import { getById } from './apiCallback'
-import { setFirstID, setLastID } from './callbackLogic'
-
 const fetchFromConnect = data => {
   const elements = data.messages.map(element => {
     if (element.id === 1) {
@@ -55,5 +51,3 @@ const fetchFromPriorMessages = (data) => {
   chatDiv.prepend(fragment)
   console.log(elements)
 }
-
-export { fetchFromConnect, fetchFromSubscribe, fetchFromPriorMessages }

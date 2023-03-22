@@ -1,6 +1,3 @@
-import { createElement } from './apiCallback'
-import { getCookie } from './cookies'
-
 const createChatCenterElement = message => {
   const element = createElement('p')
   element.append(message)
@@ -67,4 +64,3 @@ const createMessageNode = ({ message }) => {
   return messageNode
 }
 
-export { createChatCenterElement, createMessage, createUsernameNode, createDateNode, createTextMenuNode, createMessageNode }

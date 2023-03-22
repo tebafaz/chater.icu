@@ -7,7 +7,7 @@
         "description": "Chater api made by Tebafaz using long poll as connction",
         "title": "Chater.icu API",
         "contact": {
-            "name": "Tebafaz",
+            "name": "Mukhamedjanov Erjan",
             "email": "tebafaz@gmail.com"
         },
         "license": {
@@ -16,7 +16,7 @@
         },
         "version": "1.0"
     },
-    "host": "chater.icu",
+    "host": "tebafaz.com",
     "basePath": "/api/v1",
     "paths": {
         "/guest/message": {
@@ -39,7 +39,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/GuestMessageRequest"
+                            "$ref": "#/definitions/models.GuestMessageReq"
                         }
                     }
                 ],
@@ -47,19 +47,19 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/StatusSuccess"
+                            "$ref": "#/definitions/models.StatusSuccess"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     }
                 }
@@ -79,13 +79,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/MessageResponse"
+                            "$ref": "#/definitions/models.MessageRes"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     }
                 }
@@ -111,7 +111,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TokenRequest"
+                            "$ref": "#/definitions/models.TokenReq"
                         }
                     }
                 ],
@@ -119,13 +119,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TokenResponse"
+                            "$ref": "#/definitions/models.TokenRes"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     }
                 }
@@ -161,19 +161,19 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/MessageResponse"
+                            "$ref": "#/definitions/models.MessageRes"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     }
                 }
@@ -199,7 +199,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TokenRequest"
+                            "$ref": "#/definitions/models.TokenReq"
                         }
                     }
                 ],
@@ -207,13 +207,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TokenResponse"
+                            "$ref": "#/definitions/models.TokenRes"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     }
                 }
@@ -242,25 +242,25 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/MessageResponse"
+                            "$ref": "#/definitions/models.MessageRes"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     },
                     "429": {
                         "description": "Too Many Requests",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     }
                 }
@@ -288,13 +288,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/StatusSuccess"
+                            "$ref": "#/definitions/models.StatusSuccess"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     },
                     "401": {
@@ -328,7 +328,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/UserMessageRequest"
+                            "$ref": "#/definitions/models.UserMessageReq"
                         }
                     }
                 ],
@@ -336,13 +336,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/StatusSuccess"
+                            "$ref": "#/definitions/models.StatusSuccess"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     },
                     "401": {
@@ -351,7 +351,7 @@
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     }
                 }
@@ -380,7 +380,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ID"
+                            "$ref": "#/definitions/models.ID"
                         }
                     }
                 ],
@@ -388,13 +388,13 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/StatusSuccess"
+                            "$ref": "#/definitions/models.StatusSuccess"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     },
                     "401": {
@@ -403,7 +403,7 @@
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/StatusError"
+                            "$ref": "#/definitions/models.StatusError"
                         }
                     }
                 }
@@ -411,7 +411,7 @@
         }
     },
     "definitions": {
-        "GuestMessageRequest": {
+        "models.GuestMessageReq": {
             "type": "object",
             "properties": {
                 "message": {
@@ -422,68 +422,11 @@
                 }
             }
         },
-        "ID": {
+        "models.ID": {
             "type": "object",
             "properties": {
                 "id": {
                     "type": "integer"
-                }
-            }
-        },
-        "MessageResponse": {
-            "type": "object",
-            "properties": {
-                "last_id": {
-                    "type": "integer"
-                },
-                "messages": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/models.Message"
-                    }
-                }
-            }
-        },
-        "StatusError": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "type": "string"
-                }
-            }
-        },
-        "StatusSuccess": {
-            "type": "object",
-            "properties": {
-                "success": {
-                    "type": "string"
-                }
-            }
-        },
-        "TokenRequest": {
-            "type": "object",
-            "properties": {
-                "password": {
-                    "type": "string"
-                },
-                "username": {
-                    "type": "string"
-                }
-            }
-        },
-        "TokenResponse": {
-            "type": "object",
-            "properties": {
-                "token": {
-                    "type": "string"
-                }
-            }
-        },
-        "UserMessageRequest": {
-            "type": "object",
-            "properties": {
-                "message": {
-                    "type": "string"
                 }
             }
         },
@@ -503,6 +446,63 @@
                     "type": "string"
                 },
                 "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.MessageRes": {
+            "type": "object",
+            "properties": {
+                "last_id": {
+                    "type": "integer"
+                },
+                "messages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Message"
+                    }
+                }
+            }
+        },
+        "models.StatusError": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.StatusSuccess": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TokenReq": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.TokenRes": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.UserMessageReq": {
+            "type": "object",
+            "properties": {
+                "message": {
                     "type": "string"
                 }
             }
