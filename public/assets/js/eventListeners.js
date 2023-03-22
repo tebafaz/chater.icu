@@ -33,10 +33,10 @@ const deleteMessageListener = async (event) => {
 }
 
 const scrollListener = async () => {
-  if (getById('chat').scrollTop === 0 && getFirstID() !== 1) {
+  if (getById('chat').scrollTop === 0 && firstID !== 1) {
     getById('message-error').textContent = ''
     const height = getById('chat').scrollHeight
-    const res = await fetcher(`/api/v1/messages?last_id=${getFirstID()}&limit=50`, fetchFromPriorMessages)
+    const res = await fetcher(`/api/v1/messages?last_id=${firstID}&limit=50`, fetchFromPriorMessages)
     console.log(`asa ${res}`)
     if (res != null && res.error !== undefined) {
       getById('message-error').textContent = res.error

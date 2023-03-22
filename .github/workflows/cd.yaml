@@ -3,17 +3,17 @@ name: CD
 # Only trigger, when the CI workflow succeeded
 
 on:
-  push:
-    branches:
-    - main
   workflow_run:
-    workflows: ["CI"]
+    workflows:
+      - "CI"
     types:
       - completed
+    branches:
+      - main
 
 jobs:
   push_container:
-    if: github.ref_name == 'main' && github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -30,7 +30,7 @@ jobs:
         docker push ghcr.io/${{ github.repository }}:${{ github.sha }}
 
   deploy:
-    if: github.ref_name == 'main' && github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     needs: [push_container]
     steps:
@@ -45,7 +45,14 @@ jobs:
             docker pull ghcr.io/${{ github.repository }}:${{ github.sha }}
             docker stop chater.icu
             docker rm chater.icu
-            docker run --name chater.icu -p 10001:8080 \
-              --env-file ./chatericu.env \
-              --network custom-bridge \
+            docker run --name chater.icu -p ${{ secrets.DOCKER_PORT }}:8080 \
+              -e REDIS_HOSTNAME='${{ secrets.DOCKER_REDIS_HOSTNAME }}' \
+              -e REDIS_PORT='${{ secrets.DOCKER_REDIS_PORT }}' \
+              -e REDIS_PASSWORD='${{ secrets.DOCKER_REDIS_PASSWORD }}' \
+              -e POSTGRES_HOSTNAME='${{ secrets.DOCKER_POSTGRES_HOSTNAME }}' \
+              -e POSTGRES_USERNAME='${{ secrets.DOCKER_POSTGRES_USERNAME }}' \
+              -e POSTGRES_PASSWORD='${{ secrets.DOCKER_POSTGRES_PASSWORD }}' \
+              -e POSTGRES_DB_NAME='${{ secrets.DOCKER_POSTGRES_DB_NAME }}' \
+              -e POSTGRES_PORT='${{ secrets.DOCKER_POSTGRES_PORT }}' \
+              -e POSTGRES_SSL_MODE='${{ secrets.DOCKER_POSTGRES_SSL_MODE }}' \
               --restart always -d ghcr.io/${{ github.repository }}:${{ github.sha }}

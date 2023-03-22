@@ -26,7 +26,7 @@ const register = async () => {
 
 const logout = async () => {
   if (getCookie('username') == null || getCookie('Authorization') == null) {
-    setStateRegisteredID(false)
+    stateRegistered = false
     deleteAuthUserCookie()
     return
   }
@@ -36,8 +36,8 @@ const logout = async () => {
 }
 
 const sendMessage = async () => {
-  const headers = getHeaders(getStateRegisteredID())
-  if (getStateRegisteredID()) {
+  const headers = getHeaders(stateRegistered)
+  if (stateRegistered) {
     const data = {
       message: getById('message-area').value
     }
