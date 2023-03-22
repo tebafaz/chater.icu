@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -26,15 +27,15 @@ import (
 func init() {
 	err := godotenv.Load()
 	if err != nil {
-		panic("Error loading .env file")
+		log.Print("Error loading .env file")
 	}
 	err = redis.InitRedis()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	err = database.InitPostgres()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	middlewares.NewSessionCounter()
 }
@@ -102,20 +103,20 @@ func main() {
 
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-	fmt.Println("Server started")
+	log.Print("Server started")
 	select {
 	case sig := <-quit:
 		fmt.Printf("Received signal: %s\nStopping server...\n", sig.String())
 		handlers.ClosePS()
 	case err := <-startServerError:
-		panic(err)
+		log.Fatal(err)
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := server.Shutdown(ctx); err != nil {
-		panic(fmt.Sprintf("Server forced to shutdown: %v", err))
+		log.Fatalf("Server forced to shutdown: %v", err)
 	}
 
-	fmt.Println("Server stopped")
+	log.Print("Server stopped")
 }
