@@ -46,6 +46,8 @@ jobs:
             docker stop chater.icu
             docker rm chater.icu
             docker run --name chater.icu -p ${{ secrets.DOCKER_PORT }}:8080 \
+              -e HOST='${{secrets.HOST}}' \
+              -e PORT='${{secrets.PORT}}' \
               -e REDIS_HOSTNAME='${{ secrets.DOCKER_REDIS_HOSTNAME }}' \
               -e REDIS_PORT='${{ secrets.DOCKER_REDIS_PORT }}' \
               -e REDIS_PASSWORD='${{ secrets.DOCKER_REDIS_PASSWORD }}' \
@@ -55,4 +57,5 @@ jobs:
               -e POSTGRES_DB_NAME='${{ secrets.DOCKER_POSTGRES_DB_NAME }}' \
               -e POSTGRES_PORT='${{ secrets.DOCKER_POSTGRES_PORT }}' \
               -e POSTGRES_SSL_MODE='${{ secrets.DOCKER_POSTGRES_SSL_MODE }}' \
+              --network custom-bridge \
               --restart always -d ghcr.io/${{ github.repository }}:${{ github.sha }}
