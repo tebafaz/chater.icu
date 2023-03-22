@@ -39,4 +39,9 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             docker pull ghcr.io/${{ github.repository }}:${{ github.sha }}
-            docker-compose -d up
+            pwd
+            docker stop chater.icu
+            docker rm chater.icu
+            docker run --name chater.icu -p 10001:8080 \
+              --env-file ./chatericu.env \
+              --restart always -d ghcr.io/${{ github.repository }}:${{ github.sha }}
