@@ -66,7 +66,7 @@ func startServer() (*http.Server, <-chan error) {
 
 	router := gin.New()
 
-	router.Use(middlewares.AccessLog(false))
+	router.Use(middlewares.AccessLog(true))
 	router.Use(middlewares.SessionCounter(3000))
 
 	swaggerURL := ginSwagger.URL("/swagger/doc.json")
@@ -83,7 +83,7 @@ func startServer() (*http.Server, <-chan error) {
 	}
 
 	srv := &http.Server{
-		Addr:    os.Getenv("PORT"),
+		Addr:    os.Environ()[0],
 		Handler: router,
 	}
 
