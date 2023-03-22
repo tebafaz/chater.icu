@@ -61,15 +61,15 @@ definitions:
       message:
         type: string
     type: object
-host: tebafaz.com
+host: chatericu.tebafaz.com
 info:
   contact:
     email: tebafaz@gmail.com
     name: Mukhamedjanov Erjan
   description: Chater api made by Tebafaz using long poll as connction
   license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    name: MIT
+    url: https://mit-license.org/
   title: Chater.icu API
   version: "1.0"
 paths:

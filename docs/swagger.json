@@ -11,12 +11,12 @@
             "email": "tebafaz@gmail.com"
         },
         "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+            "name": "MIT",
+            "url": "https://mit-license.org/"
         },
         "version": "1.0"
     },
-    "host": "tebafaz.com",
+    "host": "chatericu.tebafaz.com",
     "basePath": "/api/v1",
     "paths": {
         "/guest/message": {
