@@ -47,7 +47,7 @@ func init() {
 // @contact.name Mukhamedjanov Erjan
 // @contact.email tebafaz@gmail.com
 
-// @host tebafaz.com
+// @host chatericu.tebafaz.com
 // @BasePath /api/v1
 
 // @license.name MIT
