@@ -83,7 +83,7 @@ func startServer() (*http.Server, <-chan error) {
 	}
 
 	srv := &http.Server{
-		Addr:    os.Environ()[0],
+		Addr:    fmt.Sprintf("%s:%s", os.Getenv("HOST"), os.Getenv("PORT")),
 		Handler: router,
 	}
 
@@ -103,7 +103,7 @@ func main() {
 
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-	log.Print("Server started")
+	log.Print("Server started on port: ", os.Getenv("PORT"))
 	select {
 	case sig := <-quit:
 		fmt.Printf("Received signal: %s\nStopping server...\n", sig.String())
