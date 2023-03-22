@@ -46,6 +46,8 @@ jobs:
             docker stop chater.icu
             docker rm chater.icu
             docker run --name chater.icu -p ${{ secrets.DOCKER_PORT }}:8080 \
+              -e HOST='${{secrets.HOST}}' \
+              -e PORT='${{secrets.PORT}}' \
               -e REDIS_HOSTNAME='${{ secrets.DOCKER_REDIS_HOSTNAME }}' \
               -e REDIS_PORT='${{ secrets.DOCKER_REDIS_PORT }}' \
               -e REDIS_PASSWORD='${{ secrets.DOCKER_REDIS_PASSWORD }}' \
