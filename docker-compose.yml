@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  chater.icu:
+    image: ghcr.io/tebafaz/chater.icu:latest
+    env_file:
+      - chatericu.env
