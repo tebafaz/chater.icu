@@ -38,10 +38,10 @@ const createUsernameNode = ({ username, isRegistered }) => {
   return usernameNode
 }
 
-const createDateNode = ({ sentAt }) => {
+const createDateNode = ({ sent_at }) => {
   const dateNode = createElement('span')
   dateNode.setAttribute('class', 'date')
-  dateNode.append(sentAt)
+  dateNode.append(sent_at)
   return dateNode
 }
 
