@@ -1,6 +1,3 @@
-import { stateRegistered } from './callbackLogic'
-import { updateAuthUserCookie, getCookie } from './cookies'
-
 async function fetcher (fetchFrom, func) {
   try {
     const res = await fetch(fetchFrom)
@@ -65,5 +62,3 @@ function getById (id) {
 function createElement (element) {
   return document.createElement(element)
 }
-
-export { fetcher, fetcherForSub, dataSend, getHeaders, getById, createElement }

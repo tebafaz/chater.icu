@@ -1,52 +1,16 @@
 basePath: /api/v1
 definitions:
-  GuestMessageRequest:
+  models.GuestMessageReq:
     properties:
       message:
         type: string
       username:
         type: string
     type: object
-  ID:
+  models.ID:
     properties:
       id:
         type: integer
-    type: object
-  MessageResponse:
-    properties:
-      last_id:
-        type: integer
-      messages:
-        items:
-          $ref: '#/definitions/models.Message'
-        type: array
-    type: object
-  StatusError:
-    properties:
-      error:
-        type: string
-    type: object
-  StatusSuccess:
-    properties:
-      success:
-        type: string
-    type: object
-  TokenRequest:
-    properties:
-      password:
-        type: string
-      username:
-        type: string
-    type: object
-  TokenResponse:
-    properties:
-      token:
-        type: string
-    type: object
-  UserMessageRequest:
-    properties:
-      message:
-        type: string
     type: object
   models.Message:
     properties:
@@ -61,11 +25,47 @@ definitions:
       username:
         type: string
     type: object
-host: chater.icu
+  models.MessageRes:
+    properties:
+      last_id:
+        type: integer
+      messages:
+        items:
+          $ref: '#/definitions/models.Message'
+        type: array
+    type: object
+  models.StatusError:
+    properties:
+      error:
+        type: string
+    type: object
+  models.StatusSuccess:
+    properties:
+      success:
+        type: string
+    type: object
+  models.TokenReq:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  models.TokenRes:
+    properties:
+      token:
+        type: string
+    type: object
+  models.UserMessageReq:
+    properties:
+      message:
+        type: string
+    type: object
+host: tebafaz.com
 info:
   contact:
     email: tebafaz@gmail.com
-    name: Tebafaz
+    name: Mukhamedjanov Erjan
   description: Chater api made by Tebafaz using long poll as connction
   license:
     name: Apache 2.0
@@ -84,22 +84,22 @@ paths:
         name: message
         required: true
         schema:
-          $ref: '#/definitions/GuestMessageRequest'
+          $ref: '#/definitions/models.GuestMessageReq'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/StatusSuccess'
+            $ref: '#/definitions/models.StatusSuccess'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
       summary: Publishes message as guest
       tags:
       - Messages
@@ -112,11 +112,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageResponse'
+            $ref: '#/definitions/models.MessageRes'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
       summary: Gets last messages
       tags:
       - Messages
@@ -132,18 +132,18 @@ paths:
         name: tokenReq
         required: true
         schema:
-          $ref: '#/definitions/TokenRequest'
+          $ref: '#/definitions/models.TokenReq'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/TokenResponse'
+            $ref: '#/definitions/models.TokenRes'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
       summary: Login
       tags:
       - Token
@@ -167,15 +167,15 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageResponse'
+            $ref: '#/definitions/models.MessageRes'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
       summary: Gets messages
       tags:
       - Messages
@@ -191,18 +191,18 @@ paths:
         name: token
         required: true
         schema:
-          $ref: '#/definitions/TokenRequest'
+          $ref: '#/definitions/models.TokenReq'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/TokenResponse'
+            $ref: '#/definitions/models.TokenRes'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
       summary: Register and get token
       tags:
       - Token
@@ -221,19 +221,19 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/MessageResponse'
+            $ref: '#/definitions/models.MessageRes'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
         "429":
           description: Too Many Requests
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
       summary: Subscribes to updates
       tags:
       - Messages
@@ -248,11 +248,11 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/StatusSuccess'
+            $ref: '#/definitions/models.StatusSuccess'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
         "401":
           description: Unauthorized
       security:
@@ -271,24 +271,24 @@ paths:
         name: id
         required: true
         schema:
-          $ref: '#/definitions/ID'
+          $ref: '#/definitions/models.ID'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/StatusSuccess'
+            $ref: '#/definitions/models.StatusSuccess'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
         "401":
           description: Unauthorized
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
       security:
       - ApiKeyAuth: []
       summary: Delete message
@@ -304,24 +304,24 @@ paths:
         name: message
         required: true
         schema:
-          $ref: '#/definitions/UserMessageRequest'
+          $ref: '#/definitions/models.UserMessageReq'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/StatusSuccess'
+            $ref: '#/definitions/models.StatusSuccess'
         "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
         "401":
           description: Unauthorized
         "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/StatusError'
+            $ref: '#/definitions/models.StatusError'
       security:
       - ApiKeyAuth: []
       summary: publishes as user

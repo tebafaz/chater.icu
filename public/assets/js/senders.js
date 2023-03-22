@@ -1,7 +1,3 @@
-import { getHeaders, dataSend, getById } from './apiCallback'
-import { getCookie, deleteAuthUserCookie } from './cookies'
-import { getStateRegisteredID, setStateRegisteredID } from './callbackLogic'
-
 const deleteMessage = async (id) => {
   const data = {
     id
@@ -54,5 +50,3 @@ const sendMessage = async () => {
     return await dataSend('/api/v1/guest/message', data, 'POST', headers)
   }
 }
-
-export { deleteMessage, login, register, logout, sendMessage }
