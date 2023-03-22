@@ -57,4 +57,5 @@ jobs:
               -e POSTGRES_DB_NAME='${{ secrets.DOCKER_POSTGRES_DB_NAME }}' \
               -e POSTGRES_PORT='${{ secrets.DOCKER_POSTGRES_PORT }}' \
               -e POSTGRES_SSL_MODE='${{ secrets.DOCKER_POSTGRES_SSL_MODE }}' \
+              --network custom-bridge \
               --restart always -d ghcr.io/${{ github.repository }}:${{ github.sha }}
