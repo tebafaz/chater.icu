@@ -1,6 +1,6 @@
-let firstID = 0
-let lastID = 0
-let stateRegistered = false
+var firstID = 0
+var lastID = 0
+var stateRegistered = false
 
 const checkSession = () => {
   if (getCookie('username') != null && getCookie('Authorization') != null) {
