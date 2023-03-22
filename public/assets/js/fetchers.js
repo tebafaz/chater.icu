@@ -11,8 +11,8 @@ const fetchFromConnect = data => {
     return element
   })
   console.log(elements)
-  setFirstID(data.messages[0].id)
-  setLastID(data.last_id)
+  firstID = data.messages[0].id
+  lastID = data.last_id
 }
 
 const fetchFromSubscribe = (data) => {
@@ -20,7 +20,7 @@ const fetchFromSubscribe = (data) => {
     getById(`${data.deleted_id}`).remove()
     return
   }
-  setLastID(data.last_id)
+  lastID = data.last_id
   const elements = data.messages.map(element => {
     const wrapper = createMessage(element)
     const chatDiv = getById('chat')
@@ -36,7 +36,7 @@ const fetchFromSubscribe = (data) => {
 }
 
 const fetchFromPriorMessages = (data) => {
-  setFirstID(data.messages[0].id)
+  firstID = data.messages[0].id
   const fragment = document.createDocumentFragment()
   const elements = data.messages.map(element => {
     if (element.id === 1) {
