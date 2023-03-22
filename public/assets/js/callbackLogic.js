@@ -53,7 +53,7 @@ async function main () {
   try {
     while (fewRequests) {
       err = await fetcherForSub(`/api/v1/subscribe?id=${lastID + 1}`, fetchFromSubscribe)
-      if (err !== undefined && err.status === tooManyRequest) {
+      if (err !== null && err.status === tooManyRequest) {
         console.log('cannot subscribe to server')
         fewRequests = false
       }
