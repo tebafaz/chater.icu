@@ -76,13 +76,13 @@
                 
                 <div class="interface" id="interface">
                     <label id="username-label">username: </label>
-                    <button class="logout" id="logout" onclick="logoutListener();">Выйти</button>
+                    <button class="logout" id="logout" onclick="logoutListener();">Log out</button>
                     <input type="text" class="username-field" id="username-field"/>
                     
                     <textarea name="message" class="message-area" id="message-area" onkeydown="sendButtonKeydownListener(event);" onkeyup="sendButtonKeyupListener(event);"></textarea>
                     <div>
                         <span id="login-register-span">
-                            <button id="login-button">Войти</button> - <button id="register-button">Регистрация</button>
+                            <button id="login-button">Log in</button> - <button id="register-button">Registration</button>
                         </span>
                     <button class="send-button" id="send-button" onclick="sendButtonClickListener();">&gt;&gt;&gt;</button>
                     </div>
@@ -90,12 +90,12 @@
                 </div>
             </div>
             <div class="rules">
-                <h2>Глобальный чат для общения</h2>
-                <h3 id="rule-1">Вы можете писать без регистрации. Просто напишите имя в поле `username`, с которого вы хотите написать</h3>
-                <h3 style="color:red;" id="rule-2">Важно: Любой пользователь может использовать имена <span style="color: gray;">серого</span> цвета. Если вы зарегистрируетесь, то получите более защищенный аккаунт с паролем.</h3>
-                <h3 style="color:red;" id="rule-3">Пользователи без регистрации не могут удалять свои сообщения</h3>
-                <p id="rule-4">API документация: <a href="/swagger/index.html">swagger</a></p>
-                <p id="rule-5">Github аккаунт создателя: <a href="https://github.com/Tebafaz">tebafaz</a></p>
+                <h2>Global chat for communication</h2>
+                <h3 id="rule-1">You can write without registration. Just enter the name in the username field from which you want to write</h3>
+                <h3 style="color:red;" id="rule-2">Important: Any user can use names in <span style="color: gray;">gray</span> color. If you register, you will get a more secure account with a password</h3>
+                <h3 style="color:red;" id="rule-3">Users without registration cannot delete their messages</h3>
+                <p id="rule-4">API documentation: <a href="/swagger/index.html">swagger</a></p>
+                <p id="rule-5">Github account of the creator: <a href="https://github.com/Tebafaz">tebafaz</a></p>
             </div>
         </div>
     </body>
