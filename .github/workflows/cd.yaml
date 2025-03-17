@@ -44,9 +44,9 @@ jobs:
           script: |
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
             docker pull ghcr.io/${{ github.repository }}:${{ github.sha }}
-            docker stop chater.icu
-            docker rm chater.icu
-            docker run --name chater.icu \
+            docker stop chater
+            docker rm chater
+            docker run --name chater \
               -e HOST='${{secrets.HOST}}' \
               -e PORT='${{secrets.PORT}}' \
               -e REDIS_HOSTNAME='${{ secrets.DOCKER_REDIS_HOSTNAME }}' \
