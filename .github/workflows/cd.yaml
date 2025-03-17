@@ -45,7 +45,7 @@ jobs:
             docker pull ghcr.io/${{ github.repository }}:${{ github.sha }}
             docker stop chater.icu
             docker rm chater.icu
-            docker run --name chater.icu -p ${{ secrets.DOCKER_PORT }}:8080 \
+            docker run --name chater.icu \
               -e HOST='${{secrets.HOST}}' \
               -e PORT='${{secrets.PORT}}' \
               -e REDIS_HOSTNAME='${{ secrets.DOCKER_REDIS_HOSTNAME }}' \
